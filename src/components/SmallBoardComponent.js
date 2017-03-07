@@ -17,7 +17,7 @@ let SmallBoardComponent = (props) => {
 SmallBoardComponent.displayName = 'SmallBoardComponent';
 
 SmallBoardComponent.propTypes = {
-  board: PropTypes.string.isRequired
+  board: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default SmallBoardComponent;

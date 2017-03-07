@@ -12,7 +12,6 @@ class BigBoardComponent extends Component {
     const { board } = this.props;
 
     const segmentedBoard = board
-      .split('\n')
       .map(row => row.match(/.{3}/g))
       .reduce((obj, row, it) => {
         const bigRow = Math.floor(it / 3);
@@ -26,7 +25,6 @@ class BigBoardComponent extends Component {
 
         return obj;
       }, [])
-      .map(row => row.map(col => col.join('\n')));
 
     return (
       <div className="bigboard-component">
@@ -39,7 +37,7 @@ class BigBoardComponent extends Component {
 }
 
 BigBoardComponent.propTypes = {
-  board: PropTypes.string.isRequired
+  board: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default BigBoardComponent;
