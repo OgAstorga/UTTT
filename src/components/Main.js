@@ -7,7 +7,8 @@ import BigBoardComponent from './BigBoardComponent';
 
 class AppComponent extends React.Component {
   render() {
-    const board = '.........\n.........\n.........\n.........\n.........\n.........\n.........\n.........\n.........';
+    const board =
+      'xxx.oxoo.\n.o.ox.xx.\n..ox.x.o.\no.x.x....\nxxoxox.o.\nooxox.x..\n.x...o..o\noooxxx.o.\n.x...ooxx';
 
     return (
       <div>
