@@ -28,9 +28,14 @@ class BigBoardComponent extends Component {
 
     return (
       <div className="bigboard-component">
-        {segmentedBoard.map(row => row.map(board =>
-          <SmallBoard board={board} />
-        ))}
+        {segmentedBoard.map(row =>
+          <div className="row">
+            {row.map(board =>
+              <SmallBoard board={board} />
+            )}
+            <div className="clearfix"></div>
+          </div>
+        )}
       </div>
     );
   }

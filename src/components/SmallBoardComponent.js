@@ -75,7 +75,18 @@ let SmallBoardComponent = (props) => {
 
   return (
     <div className={className}>
-      <pre>{board.join('\n')}</pre>
+      {board.map(row =>
+        <div className="row">
+          {row.split('').map(cell =>
+            <div className="cell">
+              <div className="inner">
+                <div className={`game game-${cell}`} />
+              </div>
+            </div>
+          )}
+          <div className="clearfix"></div>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,2 +1,25 @@
 .bigboard-component {
+  padding: 20px;
+  margin: 40px auto;
+  max-width: 500px;
+}
+
+/* SmallBoard correct sizing */
+.bigboard-component .smallboard-component {
+  float: left;
+  width: calc(100%/3);
+  box-sizing: border-box;
+}
+
+/* BigBoard divisions */
+.bigboard-component > .row + .row {
+  border-top: 3px solid #555;
+}
+
+.bigboard-component .smallboard-component {
+  border-left: 3px solid transparent;
+}
+
+.bigboard-component .smallboard-component + .smallboard-component {
+  border-left-color: #555;
 }

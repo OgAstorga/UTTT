@@ -1,2 +1,55 @@
+/* Cell correct sizing */
 .smallboard-component {
+  padding: calc(10%/3);
+}
+
+.smallboard-component .cell {
+  float: left;
+  width: calc(100%/3);
+  box-sizing: border-box;
+}
+
+.smallboard-component .cell .inner {
+  position: relative;
+  padding-top: 100%;
+}
+
+.smallboard-component .cell .game {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  right: 10%;
+  bottom: 10%;
+  border-radius: 10%;
+}
+
+/* SmallBoard divisions */
+.smallboard-component .row + .row {
+  border-top: 1px solid #555;
+}
+
+.smallboard-component .cell {
+  border-left: 1px solid transparent;
+}
+
+.smallboard-component .cell + .cell {
+  border-left-color: #555;
+}
+
+/* Coloring of winned cells */
+.game.game-x {
+  background: #ff5f5c;
+}
+
+.game.game-o {
+  background: #46d7ff;
+}
+
+/* Coloring of winned SmallBoards */
+.smallboard-component.player-x {
+  background: #ffdbd5;
+}
+
+.smallboard-component.player-o {
+  background: #ccf5ff;
 }
