@@ -6,11 +6,16 @@ import SmallBoard from './SmallBoardComponent';
 
 require('styles//BigBoard.css');
 
+import calcBoardWinner from '../helpers/calcBoardWinner';
+
 class BigBoardComponent extends Component {
   render() {
-    // Break board into small boards
-    const { board } = this.props;
+    const {
+      board,
+      lastPlay
+    } = this.props;
 
+    // Break board into small boards
     const segmentedBoard = board
       .map(row => row.match(/.{3}/g))
       .reduce((obj, row, it) => {
@@ -20,21 +25,55 @@ class BigBoardComponent extends Component {
           obj[bigRow] = obj[bigRow] || [];
           obj[bigRow][bigCol] = obj[bigRow][bigCol] || [];
 
-          obj[bigRow][bigCol].push(col)
+          obj[bigRow][bigCol].push(col);
         });
 
         return obj;
-      }, [])
+      }, []);
+
+
+    // Calc small board winners
+    let zoomedOut = [ [], [], [] ];
+    let playableRegion = [ [], [], [] ];
+
+    for (let i=0; i<3; ++i) {
+      for (let g=0; g<3; ++g) {
+        zoomedOut[i][g] = calcBoardWinner(segmentedBoard[i][g]);
+        playableRegion[i][g] = (
+          zoomedOut[i][g] === '.' &&
+          segmentedBoard[i][g].join('').indexOf('.') !== -1
+        )
+      }
+    }
+
+    // Calc valid regions
+    let [ nx, ny ] = lastPlay.map(d => {
+      if (d === -1) {
+        return -1;
+      } else {
+        return d % 3;
+      }
+    });
+
+    if ((nx !== -1 && ny !== -1) && playableRegion[nx][ny]) {
+      for (let i=0; i<3; ++i) {
+        for (let g=0; g<3; ++g) {
+          playableRegion[i][g] = (nx === i) && (ny === g);
+        }
+      }
+    }
 
     return (
       <div className="bigboard-component">
-        {segmentedBoard.map((row, it) =>
+        {[0,1,2].map(it =>
           <div className="row">
-            {row.map((board, gt) =>
+            {[0,1,2].map(gt =>
               <SmallBoard
-                board={board}
                 bigRow={it}
                 bigCol={gt}
+                board={segmentedBoard[it][gt]}
+                winner={zoomedOut[it][gt]}
+                playable={playableRegion[it][gt]}
                 setBoardState={this.props.setBoardState}
               />
             )}

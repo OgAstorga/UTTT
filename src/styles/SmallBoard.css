@@ -46,6 +46,11 @@
 }
 
 /* Coloring of winned SmallBoards */
+.smallboard-component.playable .cell {
+  cursor: pointer;
+  background: #fffecd;
+}
+
 .smallboard-component.player-x {
   background: #ffdbd5;
 }
