@@ -28,10 +28,15 @@ class BigBoardComponent extends Component {
 
     return (
       <div className="bigboard-component">
-        {segmentedBoard.map(row =>
+        {segmentedBoard.map((row, it) =>
           <div className="row">
-            {row.map(board =>
-              <SmallBoard board={board} />
+            {row.map((board, gt) =>
+              <SmallBoard
+                board={board}
+                bigRow={it}
+                bigCol={gt}
+                setBoardState={this.props.setBoardState}
+              />
             )}
             <div className="clearfix"></div>
           </div>

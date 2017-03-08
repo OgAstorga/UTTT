@@ -6,22 +6,53 @@ import React from 'react';
 import BigBoardComponent from './BigBoardComponent';
 
 class AppComponent extends React.Component {
-  render() {
-    const board = [
-      'xxx.oxoo.',
-      '.o.ox.xx.',
-      '..ox.x.o.',
-      'o.x.x....',
-      'xxoxxo.o.',
-      'ooxox.x..',
-      '.x...o..o',
-      'oooxxx.o.',
-      '.x...ooxx'
-    ];
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      player: 'o',
+      board: [
+        '.........',
+        '.........',
+        '.........',
+        '.........',
+        '.........',
+        '.........',
+        '.........',
+        '.........',
+        '.........'
+      ],
+      lastPlay: [-1, -1]
+    };
+  }
+
+  setBoardState(x, y) {
+    let { board, player } = this.state;
+
+    // Change board
+    board[x] = board[x].split('').map((c,i) => i===y ? player : c).join('');
+
+    // Toggle player
+    player = (player === 'o') ? 'x' : 'o';
+
+    // Last play
+    const lastPlay = [x, y];
+
+    this.setState({
+      board,
+      player,
+      lastPlay
+    });
+  }
+
+  render() {
     return (
       <div>
-        <BigBoardComponent board={board} />
+        <BigBoardComponent
+          board={this.state.board}
+          lastPlay={this.state.lastPlay}
+          setBoardState={this.setBoardState.bind(this)}
+        />
       </div>
     );
   }
