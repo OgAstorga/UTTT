@@ -46,6 +46,16 @@ class BigBoardComponent extends Component {
       }
     }
 
+    // Calc global winner
+    const globalWinner = calcBoardWinner(zoomedOut.map(row => row.join('')));
+    if (globalWinner !== '.') {
+      for (let i=0; i<3; ++i) {
+        for (let g=0; g<3; ++g) {
+          playableRegion[i][g] = false;
+        }
+      }
+    }
+
     // Calc valid regions
     let [ nx, ny ] = lastPlay.map(d => {
       if (d === -1) {
