@@ -26,17 +26,17 @@ class AppComponent extends React.Component {
     };
   }
 
-  setBoardState(x, y) {
+  setBoardState(row, col) {
     let { board, player } = this.state;
 
     // Change board
-    board[x] = board[x].split('').map((c,i) => i===y ? player : c).join('');
+    board[row] = board[row].split('').map((c,i) => (i === col) ? player : c).join('');
 
     // Toggle player
     player = (player === 'o') ? 'x' : 'o';
 
     // Last play
-    const lastPlay = [x, y];
+    const lastPlay = [row, col];
 
     this.setState({
       board,
