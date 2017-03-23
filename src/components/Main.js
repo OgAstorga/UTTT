@@ -74,12 +74,17 @@ class AppComponent extends React.Component {
   }
 
   render() {
+    let setBoardState = () => {};
+    if (this.state.player === 'o') {
+      setBoardState = this.setBoardState.bind(this);
+    }
+
     return (
       <div>
         <BigBoardComponent
           board={this.state.board}
           lastPlay={this.state.lastPlay}
-          setBoardState={this.setBoardState.bind(this)}
+          setBoardState={setBoardState}
         />
       </div>
     );
