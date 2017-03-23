@@ -45,6 +45,34 @@ class AppComponent extends React.Component {
     });
   }
 
+  componentDidUpdate() {
+    if (this.state.player === 'x') {
+      this.botPlay();
+    }
+  }
+
+  botPlay() {
+    const { lastPlay, board } = this.state;
+
+    const [ urlLastRow, urlLastCol ] = lastPlay;
+    const urlBoard = board.join('');
+
+    const host = document.location.hostname;
+    const url = `http://${host}:8001?lastrow=${urlLastRow}&lastcol=${urlLastCol}&board=${urlBoard}`;
+
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState == XMLHttpRequest.DONE) {
+        const obj = JSON.parse(xhr.responseText);
+        console.log(obj.lastMove);
+        this.setBoardState(obj.lastMove.y, obj.lastMove.x);
+      }
+    }
+
+    xhr.open('GET', url, true);
+    xhr.send(null);
+  }
+
   render() {
     return (
       <div>
