@@ -76,7 +76,7 @@ class BigBoardComponent extends Component {
     return (
       <div className="bigboard-component">
         <div className="header">
-          <div className="pull-left player">Tú <span className="game game-o" /></div>
+          <div className="pull-left player">You <span className="game game-o" /></div>
           <div className="pull-right player"><span className="game game-x" /> Og bot</div>
           <div className="clearfix"></div>
         </div>
